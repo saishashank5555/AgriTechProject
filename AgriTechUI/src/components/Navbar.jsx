@@ -1,305 +1,200 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const location = useLocation();
+  const menuRef = useRef(null);
+  const dropdownRef = useRef(null);
+
+  // Detect Mobile View
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 800);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Close menus on route change
+  useEffect(() => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
+  }, [location]);
+
+  // Close menus on click outside (Mobile only)
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) setMenuOpen(false);
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) setDropdownOpen(false);
+    };
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
 
   return (
-    <nav className="navbar">
-      {/* Left Section - Logo */}
-      <div className="navbar__logo">
-        <Link to="/">
-          <img
-            src="https://www.shutterstock.com/image-vector/agri-tech-leaf-logo-design-600nw-2388734381.jpg"
-            alt="AgriTechPro"
-          />
-          <span>AgriTechPro</span>
+    <header className="agri-header">
+      <nav className="agri-nav" ref={menuRef}>
+
+        {/* LOGO */}
+        <Link to="/" className="agri-logo">
+          <img src="https://www.shutterstock.com/image-vector/agri-tech-leaf-logo-design-600nw-2388734381.jpg" alt="logo" />
+          AgriTechPro
         </Link>
-      </div>
 
-      {/* Center Section - Search bar */}
-      <div className="navbar__search">
-        <input type="text" placeholder="Search for seeds, fertilizers, tools..." />
-        <button className="search-btn">Search</button>
-      </div>
-
-      {/* Mobile Toggle */}
-      <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-        ☰
-      </div>
-
-      {/* Right Section - Links */}
-      <div className={`navbar__links ${menuOpen ? "active" : ""}`}>
-        <div
-          className="dropdown"
-          onMouseEnter={() => window.innerWidth > 768 && setDropdownOpen(true)}
-          onMouseLeave={() => window.innerWidth > 768 && setDropdownOpen(false)}
-          onClick={() => window.innerWidth <= 768 && setDropdownOpen(!dropdownOpen)}
-        >
-          <span className="dropdown-toggle">
-            Categories <span className="arrow">▾</span>
-          </span>
-          {dropdownOpen && (
-            <ul className="dropdown-menu">
-              <li><Link to="/products/seeds">Seeds</Link></li>
-              <li><Link to="/products/fertilizers">Fertilizers</Link></li>
-              <li><Link to="/products/pesticides">Pesticides</Link></li>
-              <li><Link to="/products/tools">Tools</Link></li>
-              <li><Link to="/products/equipment">Equipment</Link></li>
-            </ul>
-          )}
+        {/* SEARCH */}
+        <div className="agri-center">
+          <div className="agri-search">
+            <input type="text" placeholder="Search Seeds, Fertilizers, Tools..." />
+            <button>Search</button>
+          </div>
         </div>
 
-        <Link to="/services">Services</Link>
-        <Link to="/about">About Us</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/login" className="btn-login">Login</Link>
-      </div>
+        {/* LINKS SECTION */}
+        <div className={`agri-links ${menuOpen ? "open" : ""}`}>          
 
-      {/* Internal CSS */}
-      <style jsx>{`
-        .navbar {
+          {/* Categories Dropdown */}
+          <div
+            className="agri-more-area"
+            ref={dropdownRef}
+            onMouseEnter={() => !isMobile && setDropdownOpen(true)}
+            onMouseLeave={() => !isMobile && setDropdownOpen(false)}
+          >
+            <button className="agri-more-btn" onClick={isMobile ? () => setDropdownOpen(!dropdownOpen) : undefined}>
+              Categories <span>{dropdownOpen ? "▲" : "▼"}</span>
+            </button>
+
+            {dropdownOpen && (
+              <div className="agri-dropdown open">
+                <Link to="/products/seeds">Seeds</Link>
+                <Link to="/products/fertilizers">Fertilizers</Link>
+                <Link to="/products/pesticides">Pesticides</Link>
+                <Link to="/products/tools">Tools</Link>
+                <Link to="/products/equipment">Equipment</Link>
+              </div>
+            )}
+          </div>
+
+          <Link to="/services">Services</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact</Link>
+
+          <Link to="/login" className="agri-login-btn">Login</Link>
+        </div>
+
+        {/* HAMBURGER */}
+        <button className="agri-hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span><span></span><span></span>
+        </button>
+
+      </nav>
+
+      {/* INTERNAL CSS */}
+      <style>{`
+        :root {
+          --green: #2a7a0e;
+          --border: #e2e2e2;
+          --light: #f6f8f5;
+        }
+        .agri-header {
+          background: #fff;
+          border-bottom: 1px solid var(--border);
+          position: sticky;
+          top: 0;
+          z-index: 9999;
+        }
+        .agri-nav {
+          max-width: 1300px;
+          margin: auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          background: #ffffff;
-          padding: 0.7rem 1.5rem;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-          position: sticky;
-          top: 0;
-          z-index: 100;
-          flex-wrap: wrap;
+          padding: 12px 24px;
         }
-
-        /* Logo Section */
-        .navbar__logo a {
+        .agri-logo {
           display: flex;
           align-items: center;
+          font-size: 1.6rem;
+          font-weight: 700;
           text-decoration: none;
-          color: #2a7a0e;
-          font-weight: bold;
-          font-size: 1.4rem;
+          color: var(--green);
         }
-
-        .navbar__logo img {
+        .agri-logo img {
           height: 42px;
-          margin-right: 10px;
-          border-radius: 6px;
+          border-radius: 8px;
+          margin-right: 8px;
         }
-
-        /* Search Section */
-        .navbar__search {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #f6f8f5;
+        .agri-center{ flex:1; display:flex; justify-content:center; }
+        .agri-search {
+          display:flex;
+          background: var(--light);
+          border:1px solid var(--border);
           border-radius: 25px;
-          padding: 0.3rem 0.5rem;
-          max-width: 450px;
-          margin: 0 1rem;
+          overflow:hidden;
+          width: 420px;
+          max-width:100%;
         }
-
-        .navbar__search input {
-          flex: 1;
-          border: none;
-          background: transparent;
-          font-size: 0.95rem;
-          color: #333;
-          outline: none;
-          padding: 0.4rem 0.8rem;
+        .agri-search input { flex:1; border:none; padding:10px; background:transparent; outline:none; }
+        .agri-search button {
+          background: var(--green);
+          border:none;
+          padding:10px 18px;
+          color:#fff;
+          cursor:pointer;
+          font-weight:600;
         }
-
-        .search-btn {
-          background: #2a7a0e;
-          color: #fff;
-          border: none;
-          border-radius: 25px;
-          padding: 0.4rem 1rem;
-          cursor: pointer;
-          font-weight: 500;
-          transition: background 0.3s ease;
-          white-space: nowrap;
+        .agri-links {
+          display:flex;
+          align-items:center;
+          gap:24px;
         }
-
-        .search-btn:hover {
-          background: white;
-          color: green;
+        .agri-links a { text-decoration:none; color:#333; font-weight:500; }
+        .agri-links a:hover { color: var(--green); }
+        .agri-more-btn {
+          background:none; border:none; cursor:pointer; font-weight:500; color:#333; display:flex; align-items:center; gap:4px;
         }
-
-        /* Nav Links */
-        .navbar__links {
-          display: flex;
-          align-items: center;
-          gap: 1.5rem;
-          transition: all 0.3s ease;
+        .agri-more-area{ position:relative; }
+        .agri-dropdown {
+          display:flex; flex-direction:column;
+          position:absolute; top:40px; background:#fff;
+          border:1px solid var(--border); border-radius:8px;
+          box-shadow:0 6px 18px rgba(0,0,0,0.1); animation:fadeIn .2s;
         }
-
-        .navbar__links a {
-          text-decoration: none;
-          color: #333;
-          font-size: 1rem;
-          font-weight: 500;
+        .agri-dropdown a{ padding:10px 18px; }
+        .agri-dropdown a:hover{ background:var(--light); color: var(--green); }
+        .agri-login-btn{ padding:8px 18px; border:1px solid var(--green); border-radius:6px; }
+        .agri-login-btn:hover{ background:var(--green); color:#fff; }
+        .agri-hamburger {
+          display:none;
+          flex-direction:column;
+          gap:5px;
+          background:none;
+          border:none;
+          cursor:pointer;
+          margin-left:10px;
         }
+        .agri-hamburger span{ width:26px; height:3px; background: var(--green); }
 
-        .navbar__links a:hover {
-          color: #333;
-          cursor: pointer;
-        }
-
-        /* Dropdown */
-        .dropdown {
-          position: relative;
-          cursor: pointer;
-        }
-
-        .dropdown-toggle {
-          display: flex;
-          align-items: center;
-          color: #333;
-          font-size: 1rem;
-        }
-
-        .arrow {
-          margin-left: 5px;
-          font-size: 0.9rem;
-          transition: transform 0.3s ease;
-        }
-
-        .dropdown:hover .arrow {
-          transform: rotate(180deg);
-        }
-
-        .dropdown-menu {
-          position: absolute;
-          top: 35px;
-          left: 0;
-          background: #fff;
-          border-radius: 6px;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-          padding: 0.5rem 0;
-          list-style: none;
-          min-width: 180px;
-          z-index: 50;
-          animation: fadeIn 0.2s ease;
-        }
-
-        .dropdown-menu li {
-          padding: 0.5rem 1rem;
-        }
-
-        .dropdown-menu li a {
-          color: #333;
-          display: block;
-          text-decoration: none;
-        }
-
-        .dropdown-menu li:hover {
-          background: #f3f3f3;
-        }
-
-        /* Login Button */
-        .btn-login {
-          border: 1px solid #2a7a0e;
-          padding: 0.4rem 0.9rem;
-          border-radius: 5px;
-          transition: all 0.3s ease;
-        }
-
-        .btn-login:hover {
-          background: white;
-          color: black;
-          pointer: cursor;
-        }
-
-        /* Menu Toggle */
-        .menu-toggle {
-          display: none;
-          font-size: 1.8rem;
-          cursor: pointer;
-          color: #2a7a0e;
-        }
-
-        /* Responsive Layouts */
-
-        /* Tablet */
-        @media (max-width: 1024px) {
-          .navbar__search {
-            max-width: 300px;
-            margin: 0 0.5rem;
+        /* MOBILE */
+        @media(max-width:800px){
+          .agri-center{ display:none; }
+          .agri-links{
+            display:none;
+            flex-direction:column;
+            width:100%;
+            padding:20px;
+            background:#fff;
+            border-top:1px solid var(--border);
           }
+          .agri-links.open{ display:flex; }
+          .agri-dropdown{ position:static; box-shadow:none; border:none; }
+          .agri-hamburger{ display:flex; }
         }
 
-        /* Mobile - keeps logo, search, and toggle in one row */
-        @media (max-width: 768px) {
-          .navbar {
-            flex-wrap: wrap;
-            padding: 0.8rem;
-          }
-
-          .navbar__logo {
-            flex: 0 0 auto;
-          }
-
-          .navbar__search {
-            flex: 1;
-            max-width: unset;
-            margin: 0 0.5rem;
-          }
-
-          .menu-toggle {
-            display: block;
-            flex: 0 0 auto;
-            margin-left: auto;
-          }
-
-          .navbar__links {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            background: #fff;
-            padding: 1rem 0;
-            border-top: 1px solid #eee;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-          }
-
-          .navbar__links.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-          }
-
-          .navbar__links a {
-            text-align: center;
-            padding: 0.6rem 0;
-          }
-
-          .dropdown-menu {
-            position: static;
-            background: #f8f8f8;
-            box-shadow: none;
-            border-radius: 5px;
-            margin-top: 0.5rem;
-          }
-
-          .dropdown-menu li {
-            text-align: center;
-          }
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-5px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
+        @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
       `}</style>
-    </nav>
+    </header>
   );
-};
-
-export default Navbar;
+}
