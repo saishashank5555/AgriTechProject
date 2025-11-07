@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import Carousel from "../Carousel/Carousel";
 import SlideCard from "../Carousel/SlideCard";
@@ -16,16 +15,16 @@ const Home = () => {
 
   const styles = {
     page: {
-      maxWidth: "1200px",
+      maxWidth: "100%",
       margin: "0 auto",
       padding: "16px",
       fontFamily: "sans-serif",
     },
-    sectionTitle: {
-      fontSize: "20px",
-      fontWeight: 800,
-      marginBottom: "8px",
+    title: {
+      fontSize: "14px",
+      fontWeight: "800",
       color: "#14532d",
+      marginBottom: "6px",
     },
     divider: {
       width: "60px",
@@ -37,31 +36,17 @@ const Home = () => {
   };
 
   return (
-    <div style={styles.page}>
-      <h2 style={styles.sectionTitle}>Today's Best Offers</h2>
-      <div style={styles.divider}></div>
-
+    // <div style={styles.page}>
+    
       <Carousel
         items={offers}
         renderSlide={(item) => <SlideCard item={item} />}
         animation="fade"
         autoPlayMs={4500}
-        showArrows
-        showDots
+        showDots={true}
       />
-    </div>
+    // </div>
   );
 };
 
 export default Home;
-=======
-import React from 'react'
-
-export default function Home() {
-  return (
-    <div>
-     Home Page will be Update soon....
-    </div>
-  )
-}
->>>>>>> 610889ec22e3d62e7d9498c0821f289be27a611d
