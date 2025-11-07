@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Hybrid Maize Seeds - 2 kg",
+    "category": "Seeds",
+    "price": 850,
+    "image": "https://cdn.shopify.com/s/files/1/0722/2059/files/vnr-145-chilli-seeds-file-1961.webp?v=1737482789",
+    "rating": 4.5,
+    "stock": 120,
+    "description": "High yielding hybrid maize seeds, suitable for Kharif and Rabi seasons."
+  },
+  {
+    "id": 2,
+    "name": "Urea Fertilizer - 50 kg",
+    "category": "Fertilizers",
+    "price": 4200,
+    "image": "https://cdn.shopify.com/s/files/1/0722/2059/files/alika-insecticide-file-3969.webp?v=1737470659",
+    "rating": 4.2,
+    "stock": 74,
+    "description": "Nitrogen rich fertilizer for fast crop growth."
+  },
+  {
+    "id": 3,
+    "name": "Hand Hoe (Steel)",
+    "category": "Tools",
+    "price": 450,
+    "image": "https://cdn.shopify.com/s/files/1/0722/2059/files/Reserved_ImageAttachment__13___ProductImage1_32___f333e7ab70314545a63b2c86648b37a4_1___1.jpg?v=1757677838",
+    "rating": 4.6,
+    "stock": 200,
+    "description": "Durable steel hoe for tilling and weeding."
+  },
+  {
+    "id": 4,
+    "name": "Organic Compost - 20 kg",
+    "category": "Fertilizers",
+    "price": 650,
+    "image": "https://cdn.shopify.com/s/files/1/0722/2059/files/alika-insecticide-file-3969.webp?v=1737470659",
+    "rating": 4.8,
+    "stock": 30,
+    "description": "Certified organic compost to improve soil health."
+  },
+  {
+    "id": 5,
+    "name": "Pest Control Spray - 1 L",
+    "category": "Pesticides",
+    "price": 320,
+    "image": "https://cdn.shopify.com/s/files/1/0722/2059/files/Reserved_ImageAttachment__13___ProductImage1_32___f333e7ab70314545a63b2c86648b37a4_1___1.jpg?v=1757677838",
+    "rating": 4.0,
+    "stock": 150,
+    "description": "Broad spectrum pesticide for common crop pests."
+  },
+  {
+    "id": 6,
+    "name": "Drip Irrigation Starter Kit",
+    "category": "Equipment",
+    "price": 4200,
+    "image": "https://cdn.shopify.com/s/files/1/0722/2059/files/alika-insecticide-file-3969.webp?v=1737470659",
+    "rating": 4.4,
+    "stock": 20,
+    "description": "Basic drip irrigation kit for small farms."
+  }
+]

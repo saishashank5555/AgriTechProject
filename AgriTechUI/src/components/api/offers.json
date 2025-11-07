@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Fertilizer Fest - 20% OFF",
+    "subtitle": "Urea, DAP, NPK combos",
+    "imageUrl": "https://www.kisaantrade.com/public/uploads/all/oncTIXXHi9YjJfIUxGi9Ma2AAuJkd5pKQTxtxc7Q.jpg",
+    "cta": "Shop Offer",
+    "link": "/offers/fertilizer"
+  },
+  {
+    "id": 2,
+    "title": "Seeds Super Saver",
+    "subtitle": "Hybrid paddy & maize",
+    "imageUrl": "https://farmkey.in/uploads/blogs/chill-seeds-900x390.jpg",
+    "cta": "Explore Seeds",
+    "link": "/offers/seeds"
+  },
+  {
+    "id": 3,
+    "title": "Irrigation Week – Flat ₹500 off",
+    "subtitle": "Drip kits & pumps",
+    "imageUrl": "https://tracextech.com/wp-content/uploads/2022/10/importance-of-fpo-in-agriculture-1024x342.jpeg",
+    "cta": "View Deals",
+    "link": "/offers/irrigation"
+  }
+]

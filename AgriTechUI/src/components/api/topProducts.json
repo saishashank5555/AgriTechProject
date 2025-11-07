@@ -1,0 +1,30 @@
+[
+  {
+    "id": "p101",
+    "name": "Hybrid Maize Seed (10kg)",
+    "price": 1599,
+    "imageUrl": "https://geopard.tech/wp-content/uploads/2022/01/2-min.jpg",
+    "rating": 4.6
+  },
+  {
+    "id": "p102",
+    "name": "NPK 19:19:19 (5kg)",
+    "price": 699,
+    "imageUrl": "https://www.bearingtips.com/wp-content/uploads/2021/06/SMB320-Agricultural-drone.jpg",
+    "rating": 4.4
+  },
+  {
+    "id": "p103",
+    "name": "Drip Irrigation Kit (50m)",
+    "price": 2499,
+    "imageUrl": "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-025-98137-2/MediaObjects/41598_2025_98137_Fig1_HTML.png",
+    "rating": 4.7
+  },
+  {
+    "id": "p104",
+    "name": "Drip Irrigation Kit (50m)",
+    "price": 2499,
+    "imageUrl": "https://geopard.tech/wp-content/uploads/2022/01/2-min.jpg",
+    "rating": 4.7
+  }
+]
