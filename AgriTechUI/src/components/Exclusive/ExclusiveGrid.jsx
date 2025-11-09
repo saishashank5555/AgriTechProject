@@ -17,7 +17,7 @@ const ExclusiveGrid = () => {
         .exclusive-wrapper {
           max-width:1300px;
           margin:auto;
-          padding:40px 20px;
+          padding:10px 20px;
         }
         .exclusive-title {
           text-align:center;

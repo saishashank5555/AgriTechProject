@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import brandsData from "./brandsData";
 
 const Brands = () => {
@@ -11,9 +13,12 @@ const Brands = () => {
 
   return (
     <div className="brands-section">
+
       <div className="brands-header">
-        <h2>Brands</h2>
-        <a className="view-all" onClick={() => navigate("/brands")}>View All</a>
+        <h2 className="brands-title">Brands</h2>
+        <a className="brands-more-btn" onClick={() => navigate("/brands")}>
+          View All →
+        </a>
       </div>
 
       <div className="slider">
@@ -22,9 +27,15 @@ const Brands = () => {
             <div
               className="brand-card"
               key={index}
+              style={{ "--i": index }}
               onClick={() => goToBrandProducts(brand.slug)}
             >
-              <img src={brand.image} alt={brand.name} />
+              <LazyLoadImage
+                src={brand.image}
+                alt={brand.name}
+                effect="blur"      // 👈 Smooth Blur Lazy Loading
+                draggable="false"
+              />
             </div>
           ))}
         </div>
@@ -33,7 +44,8 @@ const Brands = () => {
       <style>{`
         .brands-section {
           background: #E9F8E4;
-          padding: 40px 20px;
+          padding: 20px;
+          margin-top: 30px;
         }
 
         .brands-header {
@@ -41,21 +53,26 @@ const Brands = () => {
           justify-content: space-between;
           align-items: center;
           max-width: 1300px;
-          margin: 0 auto 20px auto;
+          margin: 0 auto 6px auto;
         }
 
-        .brands-header h2 {
-          font-size: 28px;
+        .brands-title {
+          font-size: 24px;
           font-weight: 700;
-          color: #1a4d0a;
+          color: #2a7a0e;
+          margin: 0;
         }
 
-        .view-all {
-          font-size: 16px;
-          color: #1a4d0a;
-          cursor: pointer;
-          text-decoration: underline;
+        .brands-more-btn {
+          background:#2a7a0e;
+          color:#fff;
+          padding:6px 14px;
+          border-radius:6px;
+          font-weight:600;
+          cursor:pointer;
+          transition:.3s;
         }
+        .brands-more-btn:hover { opacity:.85; }
 
         .slider {
           height: 140px;
@@ -68,37 +85,49 @@ const Brands = () => {
         .slide-track {
           display: flex;
           width: calc(160px * ${brandsData.length * 2});
-          animation: scroll 25s linear infinite;
+          animation: scroll 28s linear infinite;
         }
 
         .slider:hover .slide-track {
-          animation-play-state: paused; /* ✅ Pause on hover */
+          animation-play-state: paused;
         }
 
         .brand-card {
-          background: white;
-          border-radius: 12px;
-          padding: 18px;
-          width: 160px;
-          height: 110px;
-          margin: 0 14px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          cursor: pointer; /* ✅ Clickable */
+          background:white;
+          border-radius:12px;
+          padding:14px;
+          width:90px;
+          height:90px;
+          margin:0 14px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          box-shadow:0 2px 6px rgba(0,0,0,0.08);
+          cursor:pointer;
+
+          opacity:0;
+          transform:scale(0.85);
+          animation: fadeInSmooth .6s ease forwards;
+          animation-delay: calc(var(--i) * 0.12s);
+
+          transition: transform .3s ease, box-shadow .3s ease;
+          margin-top:10px;
         }
 
         .brand-card:hover {
-          transform: scale(1.08);
-          box-shadow: 0px 4px 12px rgba(0,0,0,0.12);
+          transform: scale(1.12);
+          box-shadow: 0px 6px 16px rgba(42,122,14,0.32);
         }
 
-        .brand-card img {
-          width: 100%;
-          height: auto;
-          object-fit: contain;
+        .brand-card img, .brand-card .lazy-load-image-background {
+          width:100%;
+          height:auto;
+          object-fit:contain;
+        }
+
+        @keyframes fadeInSmooth {
+          from { opacity: 0; transform: scale(0.85); }
+          to   { opacity: 1; transform: scale(1); }
         }
 
         @keyframes scroll {
@@ -108,9 +137,9 @@ const Brands = () => {
 
         @media (max-width: 768px) {
           .brand-card {
-            width: 130px;
-            height: 90px;
-            padding: 14px;
+            width:75px;
+            height:75px;
+            padding:12px;
           }
         }
       `}</style>

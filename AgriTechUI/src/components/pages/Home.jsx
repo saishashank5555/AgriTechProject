@@ -13,6 +13,7 @@ import TrustBanner2 from "../Banner/TrustBanner2";
 import Brands from "../Brands/Brands";
 import OffersPage from "../Offers/OffersPage";
 import Footer from "../Footer/Footer";
+import TrustSection from "../Banner/TrustSection";
 
 
 const Home = () => {
@@ -25,13 +26,15 @@ const Home = () => {
       <OffersPreview />
       {/* <OffersPage></OffersPage> */}
       <BestSellingPreview />
-      <ExclusiveGrid />
       <VegetableSeedsPreview />
       <Brands />
       <FertilizersPreview />
-      <TrustBanner />
+      {/* <TrustBanner />
+      <TrustBanner2 /> */}
+      <TrustSection />
       <FarmMachineryPreview />
-      {/* <TrustBanner2 /> */}
+ 
+      <ExclusiveGrid />
       <Footer></Footer>
       
     </div>

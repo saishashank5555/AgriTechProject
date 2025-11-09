@@ -20,3 +20,4 @@ If you are developing a production application, we recommend using TypeScript wi
 
 for icons      -->  npm install react-icons
 for api call's -->  npm install axios
+                    npm install react-lazy-load-image-component

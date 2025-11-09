@@ -4,7 +4,7 @@ import machineryData from "./machineryData";
 import MachineryCard from "./MachineryCard";
 
 const FarmMachineryPreview = () => {
-  const previewItems = machineryData.slice(0, 12); // ✅ Updated 6 → 12
+  const previewItems = machineryData.slice(0, 12); // Show first 12 items
 
   return (
     <div className="mach-preview-wrapper">
@@ -28,26 +28,28 @@ const FarmMachineryPreview = () => {
         .mach-preview-wrapper {
           max-width:1300px;
           margin:auto;
-          padding:40px 20px;
+          padding:0 20px; /* Removed extra top padding */
         }
 
         .mach-header-row {
           display:flex;
           justify-content:space-between;
           align-items:center;
-          margin-bottom:18px;
+          margin-bottom:6px; /* Reduced space */
+          margin-top:30px; /* Added top margin for spacing */
         }
 
         .mach-preview-title {
-          font-size:26px;
+          font-size:24px;
           font-weight:700;
           color:#2a7a0e;
+          margin:0; /* Removed default h2 margin */
         }
 
         .mach-more-btn {
           background:#2a7a0e;
           color:#fff;
-          padding:8px 18px;
+          padding:6px 14px;
           border-radius:6px;
           text-decoration:none;
           font-weight:600;
@@ -55,23 +57,23 @@ const FarmMachineryPreview = () => {
         }
         .mach-more-btn:hover { opacity:.85; }
 
-        /* ✅ Horizontal Scroll + Hide scrollbar */
+        /* Horizontal Scroll */
         .mach-scroll-row {
           display:flex;
-          gap:16px;
+          gap:14px;
           overflow-x:auto;
-          padding-bottom:10px;
+          padding-bottom:8px;
           scroll-behavior:smooth;
-          scrollbar-width:none; /* Firefox */
+          scrollbar-width:none;
+          margin-top:0;
         }
         .mach-scroll-row::-webkit-scrollbar {
-          display:none; /* Chrome, Safari, Edge */
+          display:none; /* Hide scrollbar cross-browser */
         }
 
         .scroll-item {
           min-width:180px;
         }
-
       `}</style>
     </div>
   );

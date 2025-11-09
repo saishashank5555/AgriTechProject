@@ -26,26 +26,29 @@ const OffersPreview = () => {
         .offers-preview-wrap { 
           max-width:1300px;
           margin:auto;
-          padding:40px 20px;
+          padding:0 20px;
         }
 
         .offers-head-row { 
           display:flex;
           justify-content:space-between;
           align-items:center;
-          margin-bottom:18px;
+          margin-bottom:6px; /* Reduced from 18px */
+          margin-top:30px; /* Added top margin for spacing */
         }
 
         .offers-title { 
-          font-size:26px;
+          font-size:24px;
           font-weight:700;
           color:#2a7a0e;
+          margin:0; /* Removed default h2 margin */
+       
         }
 
         .offers-more-btn {
           background:#2a7a0e;
           color:#fff;
-          padding:8px 18px;
+          padding:6px 14px;
           border-radius:6px;
           text-decoration:none;
           font-weight:600;
@@ -53,17 +56,18 @@ const OffersPreview = () => {
         }
         .offers-more-btn:hover { opacity:.8; }
 
-        /* Scroll container but hide scrollbar */
+        /* Horizontal Scroll */
         .offers-scroll {
           display:flex;
-          gap:16px;
+          gap:14px;
           overflow-x:auto;
-          padding-bottom:10px;
+          padding-bottom:8px;
           scroll-behavior:smooth;
-          scrollbar-width:none; /* Firefox */
+          scrollbar-width:none;
+          margin-top:0; /* Remove spacing above product list */
         }
         .offers-scroll::-webkit-scrollbar {
-          display:none; /* Chrome, Safari, Edge */
+          display:none;
         }
 
         .scroll-item { min-width:180px; }

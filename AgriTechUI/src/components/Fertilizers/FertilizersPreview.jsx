@@ -4,7 +4,7 @@ import fertilizersData from "./fertilizersData";
 import FertilizerCard from "./FertilizerCard";
 
 const FertilizersPreview = () => {
-  const previewItems = fertilizersData.slice(0, 12); // ✅ Updated 6 → 12
+  const previewItems = fertilizersData.slice(0, 12); // Show first 12 fertilizers
 
   return (
     <div className="fert-preview-wrapper">
@@ -28,26 +28,28 @@ const FertilizersPreview = () => {
         .fert-preview-wrapper {
           max-width: 1300px;
           margin: auto;
-          padding: 40px 20px;
+          padding: 0 20px; /* Removed top padding */
         }
 
         .fert-header-row {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 18px;
+          margin-bottom: 6px; /* Reduced extra space */
+          margin-top:30px; /* Added top margin for spacing */
         }
 
         .fert-preview-title {
-          font-size: 26px;
+          font-size: 24px;
           font-weight: 700;
           color: #2a7a0e;
+          margin: 0; /* Removed default margin */
         }
 
         .fert-more-btn {
           background: #2a7a0e;
           color: white;
-          padding: 8px 18px;
+          padding: 6px 14px;
           border-radius: 6px;
           text-decoration: none;
           font-weight: 600;
@@ -55,17 +57,18 @@ const FertilizersPreview = () => {
         }
         .fert-more-btn:hover { opacity: 0.85; }
 
-        /* ✅ Horizontal Scroll + Hide Scrollbar */
+        /* Horizontal Scroll */
         .fert-scroll-row {
           display: flex;
-          gap: 16px;
+          gap: 14px;
           overflow-x: auto;
-          padding-bottom: 10px;
+          padding-bottom: 8px;
           scroll-behavior: smooth;
-          scrollbar-width: none; /* Firefox */
+          scrollbar-width: none; /* Hide scrollbar for Firefox */
+          margin-top: 0;
         }
         .fert-scroll-row::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Edge */
+          display: none; /* Hide scroll in Chrome/Safari/Edge */
         }
 
         .scroll-item {
