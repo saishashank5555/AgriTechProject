@@ -10,11 +10,16 @@ import ProductList from "./components/Dashboard/UserDashboard/ProductList";
 import Services from "./components/pages/Services";
 import About from "./components/pages/About";
 import Footer from "./components/Footer";
+import VegetableSeedsPage from "./components/VegetableSeeds/VegetableSeedsPage";
+import SeedDetailsPage from "./components/VegetableSeeds/SeedDetailsPage";
+import FertilizersPage from "./components/Fertilizers/FertilizersPage";
+import FarmMachineryPage from "./components/FarmMachinery/FarmMachineryPage";
+import OffersPage from "./components/Offers/OffersPage";
+import BestSellingPage from "./components/BestSelling/BestSellingPage";
 
 function App() {
   return (
     <Router>
-   
       <Navbar />
 
       <Routes>
@@ -26,18 +31,21 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/about" element={<About />} />
 
+        {/* Vegetable Seeds Full Page Route */}
+        <Route path="/category/vegetable-seeds" element={<VegetableSeedsPage />} />
+        <Route path="/seeds/:id" element={<SeedDetailsPage />} />
+        <Route path="/category/fertilizers" element={<FertilizersPage />} />
+        <Route path="/category/farm-machinery" element={<FarmMachineryPage />} />
+        <Route path="/offers-today" element={<OffersPage />} />
+        <Route path="/best-selling" element={<BestSellingPage />} />
 
+        {/* User Dashboard Nested Routes */}
         <Route path="/userdashboard/*" element={<DashboardLayout />}>
           <Route index element={<ProductList />} />
-          {/* Future nested routes:
-              <Route path="cart" element={<Cart />} />
-              <Route path="wishlist" element={<Wishlist />} />
-              <Route path="settings" element={<UserSettings />} /> 
-          */}
         </Route>
 
-       </Routes>
-       {/* <Footer/> */}
+      </Routes>
+
     </Router>
   );
 }
